@@ -3,7 +3,7 @@
     public interface IStudentRepository
     {
         public dynamic InsertStudent(Student details);
-        public dynamic ReadStudent();
+        public List<Student> ReadStudent();
         public dynamic UpdateStudent(int ID, Student details);
         public dynamic DeleteStudent(int ID);
     }

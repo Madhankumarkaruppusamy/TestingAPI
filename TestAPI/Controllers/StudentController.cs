@@ -21,7 +21,7 @@ namespace Test.Controllers
         public dynamic GetStudentDetail()
         {
             var student= _student.ReadStudent();
-            return student();
+            return student.ToList();
         }
 
         [HttpPost]
@@ -36,8 +36,8 @@ namespace Test.Controllers
         [Route("UpdateStudentDetail")]
         public dynamic UpdateStudentDetail(int id, Student input)
         {
-            _student.UpdateStudent(id,input);
-            return Ok(input);
+            var student = _student.UpdateStudent(id,input);
+            return student.ToList();
         }
 
         [HttpDelete]

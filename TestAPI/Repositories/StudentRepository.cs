@@ -11,7 +11,7 @@ namespace Test.Repositories
         {
             _db = db;
         }
-        public dynamic ReadStudent()
+        public List<Student> ReadStudent()
         {
             try
             {
@@ -19,9 +19,9 @@ namespace Test.Repositories
                 IQueryable<Student> student = _db.Student;
                 return student.ToList();
             }
-            catch (Exception ex) 
+            catch (Exception ) 
             {
-                return ex ;
+                return null ;
             }
         }
 
@@ -50,12 +50,13 @@ namespace Test.Repositories
         }
 
 
-        public dynamic UpdateStudent(int ID, Student details)
+        public dynamic UpdateStudent(int Id, Student details)
         {
             try
             {
 
-                var result = _db.Student.Where(w => w.Id == details.Id).FirstOrDefault();
+                var result = _db.Student.Where(m => m.Id == details.Id).FirstOrDefault();
+
                 result.StudentName = details.StudentName;
                 result.RollNumber = details.RollNumber; 
                 result.EmailId = details.EmailId;   
@@ -74,9 +75,23 @@ namespace Test.Repositories
             }
         }
 
-        public dynamic DeleteStudent(int ID)
+        public dynamic DeleteStudent(int Id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var student = _db.Student.Find(Id);
+                if (student == null)
+                {
+                    return null;
+                }
+                _db.Student.Remove(student);
+                _db.SaveChanges();
+                return 200;
+            }
+            catch (Exception ex) 
+            { 
+                return ex; 
+            }
         }
     }
 }
