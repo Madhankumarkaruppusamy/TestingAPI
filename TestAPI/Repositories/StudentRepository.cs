@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Test.DBContext;
 
 namespace Test.Repositories
@@ -54,24 +55,26 @@ namespace Test.Repositories
         {
             try
             {
-
-                var result = _db.Student.Where(m => m.Id == details.Id).FirstOrDefault();
+                var result = _db.Student.FirstOrDefault(m => m.Id == Id);
+                if (result == null)
+                {
+                    return 404; // Return 404 if student with given Id is not found
+                }
 
                 result.StudentName = details.StudentName;
-                result.RollNumber = details.RollNumber; 
-                result.EmailId = details.EmailId;   
+                result.RollNumber = details.RollNumber;
+                result.EmailId = details.EmailId;
                 result.PhoneNumber = details.PhoneNumber;
                 result.City = details.City;
 
-
                 _db.Student.Update(result);
                 _db.SaveChanges();
-                return 200;
 
+                return 200; // Return 200 OK on successful update
             }
             catch (Exception ex)
             {
-                return ex;
+                return ex; // Return 500 Internal Server Error for other exceptions
             }
         }
 

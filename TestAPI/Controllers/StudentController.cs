@@ -28,20 +28,20 @@ namespace Test.Controllers
         [Route("addstudentdetail")]
         public dynamic AddStudentDetail(Student input)
         {
-            _student.InsertStudent(input);
-            return Ok(input);
+            var student=_student.InsertStudent(input);
+            return student;
         }
 
         [HttpPut]
-        [Route("updatestudentdetail")]
-        public dynamic UpdateStudentDetail(int id, Student input)
+        [Route("updatestudentdetail/{Id}")]
+        public dynamic UpdateStudentDetail(int Id, Student input)
         {
-            var student = _student.UpdateStudent(id,input);
+            var student = _student.UpdateStudent(Id,input);
             return Ok(student);
         }
 
         [HttpDelete]
-        [Route("deletestudentdetail")]
+        [Route("deletestudentdetail/{Id}")]
         public dynamic DeleteStudentDetail(int Id)
         {
             _student.DeleteStudent(Id);
