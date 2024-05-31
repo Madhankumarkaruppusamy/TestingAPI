@@ -17,7 +17,7 @@ namespace Test.Controllers
         }
 
         [HttpGet]
-        [Route("GetStudentDetail")]
+        [Route("getstudentdetail")]
         public dynamic GetStudentDetail()
         {
             var student= _student.ReadStudent();
@@ -25,7 +25,7 @@ namespace Test.Controllers
         }
 
         [HttpPost]
-        [Route("AddStudentDetail")]
+        [Route("addstudentdetail")]
         public dynamic AddStudentDetail(Student input)
         {
             _student.InsertStudent(input);
@@ -33,15 +33,15 @@ namespace Test.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateStudentDetail")]
+        [Route("updatestudentdetail")]
         public dynamic UpdateStudentDetail(int id, Student input)
         {
             var student = _student.UpdateStudent(id,input);
-            return student.ToList();
+            return Ok(student);
         }
 
         [HttpDelete]
-        [Route("DeleteStudentDetail")]
+        [Route("deletestudentdetail")]
         public dynamic DeleteStudentDetail(int Id)
         {
             _student.DeleteStudent(Id);
