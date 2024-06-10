@@ -19,37 +19,61 @@ namespace Test.Controllers
         [HttpGet]
         [Route("getstudentdetail")]
         public dynamic GetStudentDetail()
-        {
-            var student= _student.ReadStudent();
-            return student.ToList();
+        { 
+            try
+            {
+                var student = _student.ReadStudent();
+                return student.ToList();
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
         }
 
         [HttpPost]
         [Route("addstudentdetail")]
         public dynamic AddStudentDetail(Student input)
         {
-            var student=_student.InsertStudent(input);
-            return student;
+            try
+            {
+                var student = _student.InsertStudent(input);
+                return student;
+            }
+            catch (Exception ex)
+            {
+                return ex; 
+            }
         }
 
         [HttpPut]
         [Route("updatestudentdetail/{Id}")]
         public dynamic UpdateStudentDetail(int Id, Student input)
         {
-            var student = _student.UpdateStudent(Id,input);
-            return Ok(student);
-        }
+            try
+            {
+                var student = _student.UpdateStudent(Id, input);
+                return Ok(student);
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
+         }
 
         [HttpDelete]
         [Route("deletestudentdetail/{Id}")]
         public dynamic DeleteStudentDetail(int Id)
         {
-            _student.DeleteStudent(Id);
-            return Ok();
+            try
+            {
+                _student.DeleteStudent(Id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
         }
-
-
-
-
     }
 }
